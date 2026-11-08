@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "title": "Zweispaltige Modellauswahl",
+    "description": "Links den Modellanbieter und rechts das Modell wählen; Modellnamen werden unverändert angezeigt."
+  },
+  "title": "Zweispaltige Modellauswahl",
+  "vendor": "Anbieter",
+  "model": "Modell",
+  "loading": "Modelle werden geladen…",
+  "empty": "Keine Modelle verfügbar",
+  "failed": "Einige Kataloge konnten nicht geladen werden",
+  "selected": "Ausgewählt",
+  "copy": "Modellname kopieren",
+  "copied": "Kopiert",
+  "unavailable": "Modellkatalog nicht verfügbar",
+  "sessionInUse": "Sitzung ist beschäftigt; bitte später erneut versuchen",
+  "settings": "Sichtbarkeit verwalten",
+  "showAll": "Alle anzeigen",
+  "manageHint": "Gruppe oder Modell abwählen, um es in beiden Spalten auszublenden.",
+  "hiddenCount": "Ausgeblendet",
+  "effort": "Denkaufwand",
+  "effortNone": "Dieses Modell hat keine Denkstufen",
+  "effortHint": "Schieberegler ziehen zum Anwenden",
+  "sort": "Sortierung",
+  "sortDefault": "Registrierte Reihenfolge",
+  "sortNameAsc": "Name A→Z",
+  "sortNameDesc": "Name Z→A",
+  "sortCountDesc": "Meiste Modelle",
+  "sortCountAsc": "Wenigste Modelle"
+}

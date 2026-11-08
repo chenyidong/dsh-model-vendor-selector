@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "title": "Sélecteur de modèles à deux colonnes",
+    "description": "Choisissez le fournisseur à gauche et le modèle à droite ; les noms de modèles sont affichés tels qu'enregistrés."
+  },
+  "title": "Sélecteur de modèles à deux colonnes",
+  "vendor": "Fournisseur",
+  "model": "Modèle",
+  "loading": "Chargement des modèles…",
+  "empty": "Aucun modèle disponible",
+  "failed": "Certains catalogues n'ont pas pu être chargés",
+  "selected": "Sélectionné",
+  "copy": "Copier le nom du modèle",
+  "copied": "Copié",
+  "unavailable": "Catalogue de modèles indisponible",
+  "sessionInUse": "La session est occupée ; réessayez dans un instant",
+  "settings": "Gérer la visibilité",
+  "showAll": "Tout afficher",
+  "manageHint": "Décochez un groupe ou un modèle pour le masquer des deux colonnes.",
+  "hiddenCount": "Masqués",
+  "effort": "Intensité de réflexion",
+  "effortNone": "Ce modèle n'a pas de niveaux d'intensité",
+  "effortHint": "Faites glisser le curseur pour appliquer",
+  "sort": "Ordre",
+  "sortDefault": "Ordre enregistré",
+  "sortNameAsc": "Nom A→Z",
+  "sortNameDesc": "Nom Z→A",
+  "sortCountDesc": "Le plus de modèles",
+  "sortCountAsc": "Le moins de modèles"
+}

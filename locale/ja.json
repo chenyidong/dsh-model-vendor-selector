@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "title": "2列モデルセレクター",
+    "description": "左でモデル提供元、右でモデルを選択します。モデル名は登録されたとおりに表示されます。"
+  },
+  "title": "2列モデルセレクター",
+  "vendor": "提供元",
+  "model": "モデル",
+  "loading": "モデルを読み込み中…",
+  "empty": "利用可能なモデルがありません",
+  "failed": "一部のカタログを読み込めませんでした",
+  "selected": "選択中",
+  "copy": "モデル名をコピー",
+  "copied": "コピーしました",
+  "unavailable": "モデルカタログを利用できません",
+  "sessionInUse": "セッションは処理中です。少し待ってから再試行してください",
+  "settings": "表示を管理",
+  "showAll": "すべて表示",
+  "manageHint": "チェックを外すと、グループやモデルが両方の列に表示されなくなります。",
+  "hiddenCount": "非表示",
+  "effort": "思考強度",
+  "effortNone": "このモデルには思考強度の段階がありません",
+  "effortHint": "スライダーを動かすと即座に適用されます",
+  "sort": "並び順",
+  "sortDefault": "登録順",
+  "sortNameAsc": "名前 昇順",
+  "sortNameDesc": "名前 降順",
+  "sortCountDesc": "モデル数 多い順",
+  "sortCountAsc": "モデル数 少ない順"
+}

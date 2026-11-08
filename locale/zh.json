@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "title": "双列厂商模型选择器",
+    "description": "左侧选择模型厂商，右侧选择模型，模型名称按注册值原样输出。"
+  },
+  "title": "双列厂商模型选择器",
+  "vendor": "模型厂商",
+  "model": "模型",
+  "loading": "正在加载模型…",
+  "empty": "暂无可用模型",
+  "failed": "部分模型目录加载失败",
+  "selected": "已选",
+  "copy": "复制模型名称",
+  "copied": "已复制",
+  "unavailable": "模型目录不可用",
+  "sessionInUse": "当前会话正在写入，请稍后重试",
+  "settings": "管理显示",
+  "showAll": "全部显示",
+  "manageHint": "取消勾选即可隐藏对应分组或模型，两列中不再显示。",
+  "hiddenCount": "已隐藏",
+  "effort": "思考强度",
+  "effortNone": "该模型没有可选思考强度",
+  "effortHint": "拖动滑块即时生效",
+  "sort": "排序",
+  "sortDefault": "注册顺序",
+  "sortNameAsc": "名称升序",
+  "sortNameDesc": "名称降序",
+  "sortCountDesc": "模型多→少",
+  "sortCountAsc": "模型少→多"
+}

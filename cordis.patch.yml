@@ -1,0 +1,3 @@
+- insert:
+    - id: model-vendor-selector
+      name: '@local/model-vendor-selector'

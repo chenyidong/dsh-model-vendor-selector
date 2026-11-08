@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "title": "Dual-column model selector",
+    "description": "Pick a model vendor on the left and a model on the right; model names are shown exactly as registered."
+  },
+  "title": "Dual-column model selector",
+  "vendor": "Vendor",
+  "model": "Model",
+  "loading": "Loading models…",
+  "empty": "No models available",
+  "failed": "Some catalogs failed to load",
+  "selected": "Selected",
+  "copy": "Copy model name",
+  "copied": "Copied",
+  "unavailable": "Model catalog is unavailable",
+  "sessionInUse": "This session is busy; try again in a moment",
+  "settings": "Manage visibility",
+  "showAll": "Show all",
+  "manageHint": "Uncheck any group or model to hide it from both columns.",
+  "hiddenCount": "Hidden",
+  "effort": "Thinking effort",
+  "effortNone": "This model has no thinking-effort levels",
+  "effortHint": "Drag the slider to apply",
+  "sort": "Order",
+  "sortDefault": "Registered order",
+  "sortNameAsc": "Name A→Z",
+  "sortNameDesc": "Name Z→A",
+  "sortCountDesc": "Most models",
+  "sortCountAsc": "Fewest models"
+}
