@@ -530,7 +530,7 @@ window.__ModuleLoader__.load({
           onClick: () => { setVendorId(g.id); setModelId(null); },
           title: g.name,
         },
-          h('span', { style: { ...style.rowName, display: 'flex', alignItems: 'center', gap: 6 } },
+          h('span', { style: { ...style.rowName, display: 'flex', alignItems: 'center', gap: 6, whiteSpace: 'nowrap', overflowWrap: 'normal' } },
             h('span', { style: { ...style.vendorDot, background: color, marginRight: 0 } }),
             h('span', { style: { flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' } }, g.name),
             h('span', {
