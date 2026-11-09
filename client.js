@@ -334,14 +334,16 @@ window.__ModuleLoader__.load({
       } catch (e) { return fallback; }
     }
 
-    function Selector({ ctx, sessionId, locked }) {
+    function Selector({ ctx, sessionId, locked, useProjection }) {
+      // modelSelection 是宿主按会话投影的权威选择；不另存本地副本，切会话时才会自动跟着变
+      const projected = useProjection ? useProjection('modelSelection') : null;
+      const liveSel = projected ? projected.next : null;
       const [catalog, setCatalog] = React.useState(null);
       const [error, setError] = React.useState(null);
       const [open, setOpen] = React.useState(false);
       const [anchor, setAnchor] = React.useState(null);
       const [vendorId, setVendorId] = React.useState(null);
       const [modelId, setModelId] = React.useState(null);
-      const [current, setCurrent] = React.useState(null);
       const [copied, setCopied] = React.useState(false);
       const [showSettings, setShowSettings] = React.useState(false);
       const [prefs, setPrefs] = React.useState(loadPrefs);
@@ -380,17 +382,17 @@ window.__ModuleLoader__.load({
       const models = active ? active.models : [];
       const selected = models.find(m => m.id === modelId) || models[0];
 
-      const currentSel = current || (catalog && catalog.default) || null;
+      const currentSel = liveSel || (catalog && catalog.default) || null;
       const currentGroup = currentSel ? allGroups.find(g => g.id === currentSel.provider) : null;
       const currentModel = currentGroup ? currentGroup.models.find(m => m.id === currentSel.model) : null;
       const currentEfforts = (currentModel && currentModel.reasoning && currentModel.reasoning.efforts) || [];
-      const currentEffortId = (current && current.model === (currentModel && currentModel.id) && current.reasoningEffort)
+      const currentEffortId = (currentSel && currentSel.reasoningEffort)
         || (currentModel && currentModel.reasoning && currentModel.reasoning.defaultEffort);
       const currentEffort = currentEfforts.find(e => e.id === currentEffortId);
 
       const sliderModel = currentModel;
       const efforts = (sliderModel && sliderModel.reasoning && sliderModel.reasoning.efforts) || [];
-      const savedEffort = (current && current.reasoningEffort)
+      const savedEffort = (currentSel && currentSel.reasoningEffort)
         || (sliderModel && sliderModel.reasoning && sliderModel.reasoning.defaultEffort);
       const effortIndex = draftEffort !== null
         ? Math.min(draftEffort, Math.max(0, efforts.length - 1))
@@ -445,23 +447,18 @@ window.__ModuleLoader__.load({
       const saveEffort = (idx, m, provider) => {
         const level = efforts[idx];
         if (!m || !level) return;
-        if (current && current.provider === provider && current.model === m.id && current.reasoningEffort === level.id) return;
+        if (currentSel && currentSel.provider === provider && currentSel.model === m.id && currentSel.reasoningEffort === level.id) return;
         const selection = { provider, model: m.id, reasoningEffort: level.id };
         setDraftEffort(idx);
         setError(null);
-        if (!sessionId || !session || typeof session.selectModel !== 'function') {
-          setCurrent(selection);
-          return;
-        }
+        if (!sessionId || !session || typeof session.selectModel !== 'function') return;
         session.selectModel({ sessionId, ...selection }).then(result => {
           if (result && result.ok === false) {
             const code = (result.error && result.error.code) || 'error';
             setError(code === 'session/writer-held'
               ? t('sessionInUse')
               : code + ': ' + String((result.error && result.error.message) || ''));
-            return;
           }
-          setCurrent(selection);
         }, err => setError(String(err && err.message || err)));
       };
 
@@ -474,7 +471,6 @@ window.__ModuleLoader__.load({
         setDraftEffort(null);
         setError(null);
         if (!sessionId || !session || typeof session.selectModel !== 'function') {
-          setCurrent(selection);
           setOpen(false);
           return;
         }
@@ -486,7 +482,6 @@ window.__ModuleLoader__.load({
               : code + ': ' + String((result.error && result.error.message) || ''));
             return;
           }
-          setCurrent(selection);
           setOpen(false);
         }, err => setError(String(err && err.message || err)));
       };
@@ -700,7 +695,8 @@ window.__ModuleLoader__.load({
           id: 'model-vendor-selector',
           priority: -1,
           label: () => ctx.locale.bind(NS)('title'),
-        }, props => h(Selector, { ctx, sessionId: props.sessionId, locked: props.locked })));
+        }, props => h(Selector, { ctx, sessionId: props.sessionId, locked: props.locked,
+          useProjection: props.useProjection })));
       },
     };
   },
