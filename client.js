@@ -45,13 +45,13 @@ window.__ModuleLoader__.load({
 .mvs-root{font-family:inherit;font-size:13px;line-height:1.5}
 .mvs-root button{font:inherit}
 .mvs-flow{background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--dsw-alias-brand-primary) 28%,transparent),transparent)}
-.mvs-row:hover{background:color-mix(in srgb,var(--dsw-alias-label-secondary) 7%,transparent)}
+.mvs-row:hover{background:var(--dsw-alias-bg-layer-1)}
 .mvs-rowsep{position:relative}
 .mvs-rowsep::after{content:'';position:absolute;left:8px;right:8px;bottom:0;height:1px;background:linear-gradient(90deg,transparent 0,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 12%,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 88%,transparent 100%)}
 .mvs-row[aria-selected="true"]::after{display:none}
 .mvs-rowsep:last-child::after{display:none}
 .mvs-effort::before{content:'';position:absolute;left:8px;right:8px;top:0;height:1px;background:linear-gradient(90deg,transparent 0,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 12%,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 88%,transparent 100%)}
-.mvs-tick:hover{background:color-mix(in srgb,var(--dsw-alias-label-secondary) 9%,transparent);color:var(--dsw-alias-label-primary)}
+.mvs-tick:hover{background:var(--dsw-alias-bg-layer-1);color:var(--dsw-alias-label-primary)}
 .mvs-root .mvs-row:focus-visible{outline:2px solid var(--dsw-alias-brand-primary);outline-offset:-2px}
 .mvs-check{accent-color:var(--dsw-alias-brand-primary);width:14px;height:14px;cursor:pointer;flex:0 0 auto}
 .mvs-range{position:absolute;left:0;top:50%;transform:translateY(-50%);width:100%;height:18px;margin:0;padding:0;-webkit-appearance:none;appearance:none;background:transparent;outline:none;cursor:pointer}
@@ -175,7 +175,7 @@ window.__ModuleLoader__.load({
         background: 'transparent', color: 'inherit', cursor: 'pointer', font: 'inherit',
       },
       rowActive: {
-        background: 'color-mix(in srgb, var(--dsw-alias-brand-primary) 14%, transparent)',
+        background: 'var(--dsw-alias-bg-layer-1)',
         color: 'var(--dsw-alias-brand-primary)',
       },
       rowName: {
@@ -274,14 +274,14 @@ window.__ModuleLoader__.load({
       value: {
         fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
         padding: '2px 6px', borderRadius: 6,
-        background: 'color-mix(in srgb, var(--dsw-alias-label-secondary) 8%, transparent)',
+        background: 'var(--dsw-alias-bg-layer-1)',
         wordBreak: 'break-all',
       },
       count: { fontSize: 11, color: 'var(--dsw-alias-label-secondary)' },
       button: {
         padding: '4px 10px', borderRadius: 7, cursor: 'pointer',
         border: '1px solid transparent',
-        background: 'color-mix(in srgb, var(--dsw-alias-label-secondary) 8%, transparent)',
+        background: 'var(--dsw-alias-bg-layer-1)',
         color: 'var(--dsw-alias-label-primary)', font: 'inherit',
       },
     };
@@ -535,8 +535,7 @@ window.__ModuleLoader__.load({
             h('span', { style: { ...style.vendorDot, background: color, marginRight: 0 } }),
             h('span', { style: { flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' } }, g.name),
             h('span', {
-              style: { ...style.countPill, color,
-                background: `color-mix(in srgb, ${color} 14%, transparent)` },
+              style: { ...style.countPill, color },
               'aria-label': String(g.models.length), title: String(g.models.length),
             }, g.models.length)),
           h('span', { style: { ...style.rowId, ...(isActive ? style.rowIdActive : {}) } }, g.id),
@@ -574,8 +573,7 @@ window.__ModuleLoader__.load({
               h('span', { style: { ...style.groupBar, background: color } }),
               h('input', { type: 'checkbox', className: 'mvs-check', checked: !groupHidden, onChange: () => toggleGroup(g.id) }),
               h('span', { style: { flex: 1, minWidth: 0 } }, g.name),
-              h('span', { style: { ...style.countPill, color,
-                background: `color-mix(in srgb, ${color} 14%, transparent)` }, title: String(g.models.length) }, g.models.length),
+              h('span', { style: { ...style.countPill, color }, title: String(g.models.length) }, g.models.length),
               h('span', { style: style.rowId }, g.id)),
             g.models.map(m => {
               const key = g.id + '/' + m.id;
@@ -608,7 +606,7 @@ window.__ModuleLoader__.load({
           h('span', { style: { ...style.titleDot, background: accent } }),
           h('span', { style: style.effortLabel }, t('effort')),
           h('span', { style: { ...style.effortValue, ...(efforts.length > 1
-            ? { color: accent, background: `color-mix(in srgb, ${accent} 14%, transparent)` }
+            ? { color: accent, background: 'var(--dsw-alias-bg-layer-1)' }
             : { color: 'var(--dsw-alias-label-secondary)', background: 'transparent' }) } },
             effort ? effort.name : t('effortNone')),
           efforts.length > 1 && h('span', { style: style.effortHint }, t('effortHint'))),
@@ -633,7 +631,7 @@ window.__ModuleLoader__.load({
             key: e.id, className: 'mvs-tick',
             style: { ...style.tick, ...(i === effortIndex ? {
               ...style.tickActive, color: accent,
-              background: `color-mix(in srgb, ${accent} 14%, transparent)`,
+              background: 'var(--dsw-alias-bg-layer-1)',
             } : {}) },
             onClick: () => { setDraftEffort(i); saveEffort(i, sliderModel, sliderProvider); },
           }, e.name))),
