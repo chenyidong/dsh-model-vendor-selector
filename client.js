@@ -44,21 +44,21 @@ window.__ModuleLoader__.load({
     const CSS = `
 .mvs-root{font-family:inherit;font-size:13px;line-height:1.5}
 .mvs-root button{font:inherit}
-.mvs-flow{background:linear-gradient(90deg,transparent,var(--dsw-alias-brand-primary),var(--dsw-alias-state-success-primary),var(--dsw-alias-state-warn-primary),transparent);background-size:200% 100%;animation:mvs-drift 3.4s linear infinite}
-.mvs-shimmer{background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);background-size:200% 100%;animation:mvs-drift 2.1s linear infinite}
-@keyframes mvs-drift{from{background-position:200% 0}to{background-position:-200% 0}}
-.mvs-row:hover{background:var(--dsw-alias-bg-layer-1)}
+.mvs-flow{background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--dsw-alias-brand-primary) 28%,transparent),transparent)}
+.mvs-row:hover{background:color-mix(in srgb,var(--dsw-alias-label-secondary) 7%,transparent)}
 .mvs-rowsep{position:relative}
 .mvs-rowsep::after{content:'';position:absolute;left:8px;right:8px;bottom:0;height:1px;background:linear-gradient(90deg,transparent 0,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 12%,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 88%,transparent 100%)}
 .mvs-row[aria-selected="true"]::after{display:none}
 .mvs-rowsep:last-child::after{display:none}
+.mvs-effort::before{content:'';position:absolute;left:8px;right:8px;top:0;height:1px;background:linear-gradient(90deg,transparent 0,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 12%,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 88%,transparent 100%)}
+.mvs-tick:hover{background:color-mix(in srgb,var(--dsw-alias-label-secondary) 9%,transparent);color:var(--dsw-alias-label-primary)}
 .mvs-root .mvs-row:focus-visible{outline:2px solid var(--dsw-alias-brand-primary);outline-offset:-2px}
 .mvs-check{accent-color:var(--dsw-alias-brand-primary);width:14px;height:14px;cursor:pointer;flex:0 0 auto}
 .mvs-range{position:absolute;left:0;top:50%;transform:translateY(-50%);width:100%;height:18px;margin:0;padding:0;-webkit-appearance:none;appearance:none;background:transparent;outline:none;cursor:pointer}
 .mvs-range::-webkit-slider-runnable-track{height:18px;background:transparent;border:0}
 .mvs-range::-moz-range-track{height:18px;background:transparent;border:0}
-.mvs-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;box-sizing:border-box;width:16px;height:16px;margin-top:1px;border-radius:50%;background:var(--dsw-alias-bg-overlay);border:3px solid var(--mvs-accent,var(--dsw-alias-brand-primary));box-shadow:0 1px 6px rgba(0,0,0,.22);cursor:grab}
-.mvs-range::-moz-range-thumb{box-sizing:border-box;width:16px;height:16px;border-radius:50%;background:var(--dsw-alias-bg-overlay);border:3px solid var(--mvs-accent,var(--dsw-alias-brand-primary));box-shadow:0 1px 6px rgba(0,0,0,.22);cursor:grab}
+.mvs-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;box-sizing:border-box;width:14px;height:14px;margin-top:2px;border-radius:50%;background:var(--dsw-alias-bg-overlay);border:3px solid var(--mvs-accent,var(--dsw-alias-brand-primary));box-shadow:0 1px 3px rgba(0,0,0,.16);cursor:grab}
+.mvs-range::-moz-range-thumb{box-sizing:border-box;width:14px;height:14px;border-radius:50%;background:var(--dsw-alias-bg-overlay);border:3px solid var(--mvs-accent,var(--dsw-alias-brand-primary));box-shadow:0 1px 3px rgba(0,0,0,.16);cursor:grab}
 .mvs-range:focus-visible::-webkit-slider-thumb{outline:2px solid var(--mvs-accent,var(--dsw-alias-brand-primary));outline-offset:2px}
 .mvs-range:disabled{cursor:not-allowed;opacity:.5}
 `;
@@ -126,51 +126,48 @@ window.__ModuleLoader__.load({
         position: 'fixed', zIndex: 41, display: 'flex', flexDirection: 'column',
         width: 600, maxWidth: 'calc(100vw - 32px)', height: PANEL_H,
         maxHeight: 'calc(100vh - 32px)', overflow: 'hidden',
-        border: '1px solid var(--dsw-alias-border-l1)', borderRadius: 14,
+        border: '1px solid var(--dsw-alias-border-l1)', borderRadius: 12,
         background: 'var(--dsw-alias-bg-overlay)', color: 'var(--dsw-alias-label-primary)',
-        boxShadow: '0 16px 48px rgba(0, 0, 0, .24)',
+        boxShadow: '0 8px 28px rgba(0, 0, 0, .14)',
         fontFamily: 'inherit', fontSize: 13, lineHeight: 1.5,
       },
       header: {
-        display: 'flex', alignItems: 'center', gap: 10, flex: '0 0 auto',
-        padding: '12px 16px 10px', borderBottom: '1px solid var(--dsw-alias-border-l1)',
-        background: 'var(--dsw-alias-bg-layer-1)',
+        display: 'flex', alignItems: 'center', gap: 9, flex: '0 0 auto',
+        padding: '10px 14px 8px',
       },
       headerMark: {
-        width: 4, height: 20, borderRadius: 3, flex: '0 0 auto',
-        background: 'linear-gradient(180deg, var(--dsw-alias-brand-primary), var(--dsw-alias-state-success-primary))',
+        width: 3, height: 14, borderRadius: 2, flex: '0 0 auto',
+        background: 'var(--dsw-alias-brand-primary)',
       },
-      headerTitle: { fontSize: 14, fontWeight: 700, letterSpacing: '.02em' },
+      headerTitle: { fontSize: 13, fontWeight: 700, letterSpacing: '.02em' },
       headerSub: { fontSize: 11, color: 'var(--dsw-alias-label-secondary)' },
       gear: {
-        marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 6,
-        padding: '4px 9px', borderRadius: 7, cursor: 'pointer', fontSize: 12,
-        border: '1px solid var(--dsw-alias-border-l2)',
-        background: 'var(--dsw-alias-bg-layer-2)',
-        color: 'var(--dsw-alias-label-primary)',
+        marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: 5,
+        padding: '3px 6px', borderRadius: 6, cursor: 'pointer', fontSize: 11.5,
+        border: '1px solid transparent',
+        background: 'transparent',
+        color: 'var(--dsw-alias-label-secondary)',
       },
-      gearActive: { borderColor: 'var(--dsw-alias-brand-primary)' },
-      flowStrip: { height: 2, flex: '0 0 2px' },
-      body: { display: 'flex', flex: 1, minHeight: 0, padding: '12px 14px', gap: 14 },
+      gearActive: { color: 'var(--dsw-alias-brand-primary)' },
+      flowStrip: { height: 1, flex: '0 0 1px' },
+      body: { display: 'flex', flex: 1, minHeight: 0, padding: '10px 12px', gap: 12 },
       col: { display: 'flex', flexDirection: 'column', minWidth: 0, minHeight: 0 },
       colVendor: { flex: '3 1 0' },
       colModel: { flex: '4 1 0' },
-      divider: { width: 1, alignSelf: 'stretch', background: 'var(--dsw-alias-border-l1)' },
+      divider: { width: 1, alignSelf: 'stretch', background: 'var(--dsw-alias-border-l2)', opacity: .6 },
       title: {
         display: 'flex', alignItems: 'center', gap: 6, flex: '0 0 auto',
-        fontSize: 11, fontWeight: 700, letterSpacing: '.10em', textTransform: 'uppercase',
-        color: 'var(--dsw-alias-label-secondary)', padding: '0 4px 8px',
+        fontSize: 10.5, fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase',
+        color: 'var(--dsw-alias-label-secondary)', padding: '0 4px 6px',
       },
-      titleDot: { width: 7, height: 7, borderRadius: 2, flex: '0 0 auto' },
+      titleDot: { width: 6, height: 6, borderRadius: 2, flex: '0 0 auto' },
       countPill: {
-        flex: '0 0 auto', fontSize: 11, fontWeight: 700, padding: '1px 7px',
-        borderRadius: 999, border: '1px solid', lineHeight: 1.6,
-        background: 'var(--dsw-alias-bg-layer-2)',
+        flex: '0 0 auto', fontSize: 10.5, fontWeight: 600, padding: '0 6px',
+        borderRadius: 999, lineHeight: 1.7,
       },
       list: {
-        flex: 1, minHeight: 0, overflowY: 'auto', padding: 4,
-        border: '1px solid var(--dsw-alias-border-l1)', borderRadius: 10,
-        background: 'var(--dsw-alias-bg-layer-2)',
+        flex: 1, minHeight: 0, overflowY: 'auto', padding: 2,
+        borderRadius: 8,
       },
       row: {
         display: 'block', width: '100%', textAlign: 'left', padding: '5px 10px',
@@ -178,8 +175,8 @@ window.__ModuleLoader__.load({
         background: 'transparent', color: 'inherit', cursor: 'pointer', font: 'inherit',
       },
       rowActive: {
-        background: 'var(--dsw-alias-brand-primary)', color: '#fff',
-        boxShadow: '0 2px 10px rgba(0, 0, 0, .14)',
+        background: 'color-mix(in srgb, var(--dsw-alias-brand-primary) 14%, transparent)',
+        color: 'var(--dsw-alias-brand-primary)',
       },
       rowName: {
         display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical',
@@ -190,7 +187,7 @@ window.__ModuleLoader__.load({
         color: 'var(--dsw-alias-label-secondary)',
         overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
       },
-      rowIdActive: { color: '#fff', opacity: .78 },
+      rowIdActive: { color: 'var(--dsw-alias-brand-primary)', opacity: .7 },
       vendorDot: {
         display: 'inline-block', width: 8, height: 8, borderRadius: '50%',
         verticalAlign: 'middle', marginRight: 8, flex: '0 0 auto',
@@ -218,34 +215,37 @@ window.__ModuleLoader__.load({
       },
       notice: { padding: '10px 6px', color: 'var(--dsw-alias-label-secondary)' },
       effort: {
-        flex: '0 0 auto', padding: '10px 18px 14px',
-        borderTop: '1px solid var(--dsw-alias-border-l1)',
-        background: 'var(--dsw-alias-bg-layer-1)',
+        position: 'relative', flex: '0 0 auto', padding: '9px 14px 10px',
       },
-      effortHead: { display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 12 },
+      effortHead: { display: 'flex', alignItems: 'center', gap: 8, marginBottom: 9 },
       effortLabel: {
         fontSize: 11, fontWeight: 700, letterSpacing: '.10em', textTransform: 'uppercase',
         color: 'var(--dsw-alias-label-secondary)',
       },
-      effortValue: { fontSize: 13, fontWeight: 700, color: 'var(--dsw-alias-brand-primary)' },
-      effortHint: { marginLeft: 'auto', fontSize: 11, color: 'var(--dsw-alias-label-secondary)' },
+      effortValue: {
+        fontSize: 11.5, fontWeight: 700, padding: '2px 9px', borderRadius: 999,
+        whiteSpace: 'nowrap',
+      },
+      effortHint: { marginLeft: 'auto', fontSize: 10.5, color: 'var(--dsw-alias-label-secondary)', opacity: .8 },
       trackWrap: { position: 'relative', height: 18, display: 'flex', alignItems: 'center', padding: '0 8px' },
       track: {
-        position: 'relative', width: '100%', height: 8, borderRadius: 999, overflow: 'hidden',
-        background: 'var(--dsw-alias-bg-layer-2)', border: '1px solid var(--dsw-alias-border-l1)',
+        position: 'relative', width: '100%', height: 6, borderRadius: 999, overflow: 'hidden',
+        background: 'var(--dsw-alias-bg-layer-2)',
       },
       fill: {
         position: 'absolute', left: 0, top: 0, bottom: 0, borderRadius: 999,
-        background: 'linear-gradient(90deg, var(--dsw-alias-state-success-primary), var(--dsw-alias-state-warn-primary), var(--dsw-alias-brand-primary))',
+        background: 'linear-gradient(90deg, color-mix(in srgb, var(--mvs-accent) 45%, transparent), var(--mvs-accent))',
       },
-      fillShine: { position: 'absolute', inset: 0 },
-      ticks: { display: 'flex', marginTop: 9 },
+      ticks: { display: 'flex', gap: 4, marginTop: 9 },
       tick: {
-        flex: 1, textAlign: 'center', fontSize: 11, padding: '0 3px', cursor: 'pointer',
+        flex: 1, textAlign: 'center', fontSize: 11, padding: '3px 4px', cursor: 'pointer',
+        borderRadius: 6, border: '1px solid transparent',
+        background: 'transparent',
         color: 'var(--dsw-alias-label-secondary)',
         overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+        transition: 'background .15s, color .15s',
       },
-      tickActive: { color: 'var(--dsw-alias-brand-primary)', fontWeight: 700 },
+      tickActive: { fontWeight: 700 },
       settings: { flex: 1, minHeight: 0, overflowY: 'auto', padding: '12px 16px' },
       settingsHint: { fontSize: 12, color: 'var(--dsw-alias-label-secondary)', marginBottom: 10 },
       sortRow: { display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 },
@@ -269,19 +269,19 @@ window.__ModuleLoader__.load({
       footer: {
         flex: '0 0 auto', display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap',
         padding: '9px 14px', borderTop: '1px solid var(--dsw-alias-border-l1)',
-        background: 'var(--dsw-alias-bg-layer-2)', fontSize: 12,
+        fontSize: 12,
       },
       value: {
         fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
-        padding: '3px 7px', borderRadius: 6,
-        background: 'var(--dsw-alias-bg-layer-1)',
-        border: '1px solid var(--dsw-alias-border-l1)', wordBreak: 'break-all',
+        padding: '2px 6px', borderRadius: 6,
+        background: 'color-mix(in srgb, var(--dsw-alias-label-secondary) 8%, transparent)',
+        wordBreak: 'break-all',
       },
       count: { fontSize: 11, color: 'var(--dsw-alias-label-secondary)' },
       button: {
         padding: '4px 10px', borderRadius: 7, cursor: 'pointer',
-        border: '1px solid var(--dsw-alias-border-l2)',
-        background: 'var(--dsw-alias-bg-layer-1)',
+        border: '1px solid transparent',
+        background: 'color-mix(in srgb, var(--dsw-alias-label-secondary) 8%, transparent)',
         color: 'var(--dsw-alias-label-primary)', font: 'inherit',
       },
     };
@@ -305,16 +305,13 @@ window.__ModuleLoader__.load({
       return null;
     }
 
-    function renderBadge(m, onActive) {
+    function renderBadge(m) {
       if (!m || !m.badge) return null;
       const tone = String(m.badge.tone || m.badge.type || 'info').toLowerCase();
       const text = badgeText(m.badge.text);
       if (!text) return null;
-      const bg = style.badgeTone[tone] || style.badgeTone.info;
-      const toneStyle = onActive
-        ? { background: '#fff', color: bg }
-        : { background: bg, color: '#fff' };
-      return h('span', { key: 'badge-' + m.id, title: text, style: { ...style.badge, ...toneStyle } },
+      return h('span', { key: 'badge-' + m.id, title: text,
+        style: { ...style.badge, background: style.badgeTone[tone] || style.badgeTone.info } },
         h('span', { style: style.badgeText }, text));
     }
 
@@ -538,9 +535,8 @@ window.__ModuleLoader__.load({
             h('span', { style: { ...style.vendorDot, background: color, marginRight: 0 } }),
             h('span', { style: { flex: 1, minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' } }, g.name),
             h('span', {
-              style: { ...style.countPill, borderColor: color,
-                color: isActive ? 'var(--dsw-alias-label-primary)' : color,
-                ...(isActive ? { background: 'var(--dsw-alias-bg-overlay)' } : {}) },
+              style: { ...style.countPill, color,
+                background: `color-mix(in srgb, ${color} 14%, transparent)` },
               'aria-label': String(g.models.length), title: String(g.models.length),
             }, g.models.length)),
           h('span', { style: { ...style.rowId, ...(isActive ? style.rowIdActive : {}) } }, g.id),
@@ -557,7 +553,7 @@ window.__ModuleLoader__.load({
           title: m.id,
         },
           h('span', { style: style.rowName }, m.name),
-          h('span', { style: style.badgeSlot }, renderBadge(m, isActive)),
+          h('span', { style: style.badgeSlot }, renderBadge(m)),
         );
       });
 
@@ -578,7 +574,8 @@ window.__ModuleLoader__.load({
               h('span', { style: { ...style.groupBar, background: color } }),
               h('input', { type: 'checkbox', className: 'mvs-check', checked: !groupHidden, onChange: () => toggleGroup(g.id) }),
               h('span', { style: { flex: 1, minWidth: 0 } }, g.name),
-              h('span', { style: { ...style.countPill, borderColor: color, color }, title: String(g.models.length) }, g.models.length),
+              h('span', { style: { ...style.countPill, color,
+                background: `color-mix(in srgb, ${color} 14%, transparent)` }, title: String(g.models.length) }, g.models.length),
               h('span', { style: style.rowId }, g.id)),
             g.models.map(m => {
               const key = g.id + '/' + m.id;
@@ -606,15 +603,18 @@ window.__ModuleLoader__.load({
             models.length === 0 && h('div', { style: style.notice }, catalog ? t('empty') : t('loading')),
             modelRows)));
 
-      const effortPane = h('div', { style: style.effort },
+      const effortPane = h('div', { className: 'mvs-effort', style: style.effort },
         h('div', { style: style.effortHead },
+          h('span', { style: { ...style.titleDot, background: accent } }),
           h('span', { style: style.effortLabel }, t('effort')),
-          h('span', { style: { ...style.effortValue, color: accent } }, effort ? effort.name : t('effortNone')),
-          h('span', { style: style.effortHint }, efforts.length > 1 ? t('effortHint') : t('effortNone'))),
+          h('span', { style: { ...style.effortValue, ...(efforts.length > 1
+            ? { color: accent, background: `color-mix(in srgb, ${accent} 14%, transparent)` }
+            : { color: 'var(--dsw-alias-label-secondary)', background: 'transparent' }) } },
+            effort ? effort.name : t('effortNone')),
+          efforts.length > 1 && h('span', { style: style.effortHint }, t('effortHint'))),
         h('div', { style: { ...style.trackWrap, '--mvs-accent': accent } },
           h('div', { style: style.track },
-            h('div', { style: { ...style.fill, width: fillPct } },
-              h('div', { className: 'mvs-shimmer', style: style.fillShine })),
+            h('div', { style: { ...style.fill, width: fillPct } }),
           ),
           h('input', {
             type: 'range', className: 'mvs-range', min: 0,
@@ -630,7 +630,11 @@ window.__ModuleLoader__.load({
         ),
         h('div', { style: style.ticks },
           efforts.map((e, i) => h('span', {
-            key: e.id, style: { ...style.tick, ...(i === effortIndex ? { ...style.tickActive, color: accent } : {}) },
+            key: e.id, className: 'mvs-tick',
+            style: { ...style.tick, ...(i === effortIndex ? {
+              ...style.tickActive, color: accent,
+              background: `color-mix(in srgb, ${accent} 14%, transparent)`,
+            } : {}) },
             onClick: () => { setDraftEffort(i); saveEffort(i, sliderModel, sliderProvider); },
           }, e.name))),
       );
@@ -655,8 +659,8 @@ window.__ModuleLoader__.load({
                 h('svg', { viewBox: '0 0 24 24', width: 15, height: 15, fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, 'aria-hidden': true },
                   h('line', { x1: 4, y1: 7, x2: 20, y2: 7 }),
                   h('line', { x1: 4, y1: 17, x2: 20, y2: 17 }),
-                  h('circle', { cx: 9, cy: 7, r: 2.2, fill: 'var(--dsw-alias-bg-layer-1)' }),
-                  h('circle', { cx: 15, cy: 17, r: 2.2, fill: 'var(--dsw-alias-bg-layer-1)' })),
+                  h('circle', { cx: 9, cy: 7, r: 2.2 }),
+                  h('circle', { cx: 15, cy: 17, r: 2.2 })),
                 t('settings'))),
             h('div', { className: 'mvs-flow', style: style.flowStrip, 'aria-hidden': true }),
             body,
