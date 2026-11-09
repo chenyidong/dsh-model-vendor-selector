@@ -181,27 +181,19 @@ window.__ModuleLoader__.load({
         display: 'block', fontWeight: 600,
         overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
       },
-      rowNameFlex: {
-        display: 'flex', alignItems: 'center', gap: 6, minWidth: 0,
-      },
-      rowNameText: {
-        flex: '0 1 auto', minWidth: 0, fontWeight: 600,
-        overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-      },
       rowId: {
         display: 'block', fontSize: 10.5, marginTop: 1,
         color: 'var(--dsw-alias-label-secondary)',
-        overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
-      },
-      rowIdInline: {
-        display: 'block', flex: '0 1 auto', minWidth: 0, maxWidth: '42%', marginTop: 0,
-        fontSize: 10, color: 'var(--dsw-alias-label-secondary)',
         overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
       },
       rowIdActive: { color: '#fff', opacity: .78 },
       vendorDot: {
         display: 'inline-block', width: 8, height: 8, borderRadius: '50%',
         verticalAlign: 'middle', marginRight: 8, flex: '0 0 auto',
+      },
+      badgeSlot: {
+        display: 'block', height: 13, marginTop: 3, lineHeight: '13px',
+        overflow: 'hidden',
       },
       badge: {
         display: 'inline-flex', alignItems: 'center', flex: '0 0 auto',
@@ -309,13 +301,16 @@ window.__ModuleLoader__.load({
       return null;
     }
 
-    function renderBadge(m) {
+    function renderBadge(m, onActive) {
       if (!m || !m.badge) return null;
       const tone = String(m.badge.tone || m.badge.type || 'info').toLowerCase();
       const text = badgeText(m.badge.text);
       if (!text) return null;
       const bg = style.badgeTone[tone] || style.badgeTone.info;
-      return h('span', { key: 'badge-' + m.id, title: text, style: { ...style.badge, background: bg } },
+      const toneStyle = onActive
+        ? { background: '#fff', color: bg }
+        : { background: bg, color: '#fff' };
+      return h('span', { key: 'badge-' + m.id, title: text, style: { ...style.badge, ...toneStyle } },
         h('span', { style: style.badgeText }, text));
     }
 
@@ -557,10 +552,8 @@ window.__ModuleLoader__.load({
           onClick: () => choose(m),
           title: m.id,
         },
-          h('span', { style: style.rowNameFlex },
-            h('span', { style: style.rowNameText }, m.name),
-            renderBadge(m),
-            h('span', { style: { ...style.rowIdInline, ...(isActive ? style.rowIdActive : {}) } }, m.id)),
+          h('span', { style: style.rowName }, m.name),
+          h('span', { style: style.badgeSlot }, renderBadge(m, isActive)),
         );
       });
 
