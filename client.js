@@ -103,16 +103,20 @@ window.__ModuleLoader__.load({
 
     const style = {
       trigger: {
-        display: 'inline-flex', alignItems: 'center', gap: 6, maxWidth: 300,
-        padding: '4px 9px', border: '1px solid var(--dsw-alias-border-l1)', borderRadius: 8,
+        display: 'inline-flex', alignItems: 'center', alignSelf: 'center',
+        flex: '0 0 auto', gap: 5, maxWidth: 300, minHeight: 24,
+        padding: '0 8px', border: '1px solid var(--dsw-alias-border-l1)', borderRadius: 8,
         background: 'var(--dsw-alias-bg-layer-2)', color: 'var(--dsw-alias-label-primary)',
-        cursor: 'pointer', font: 'inherit', fontSize: 13,
+        cursor: 'pointer', font: 'inherit', fontSize: 13, lineHeight: '22px',
       },
       triggerOpen: { borderColor: 'var(--dsw-alias-brand-primary)' },
       triggerLocked: { opacity: .5, cursor: 'not-allowed' },
-      triggerName: { overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 600 },
-      triggerEffort: { fontSize: 11, color: 'var(--dsw-alias-label-secondary)', whiteSpace: 'nowrap' },
-      chevron: { fontSize: 10, opacity: .6 },
+      triggerName: { flex: '0 1 auto', minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 600 },
+      triggerEffort: {
+        flex: '0 0 auto', fontSize: 11, color: 'var(--dsw-alias-label-secondary)',
+        whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 96,
+      },
+      chevron: { flex: '0 0 auto', fontSize: 10, opacity: .6 },
       backdrop: { position: 'fixed', inset: 0, zIndex: 40 },
       popover: {
         position: 'fixed', zIndex: 41, display: 'flex', flexDirection: 'column',
@@ -165,7 +169,7 @@ window.__ModuleLoader__.load({
         background: 'var(--dsw-alias-bg-layer-2)',
       },
       row: {
-        display: 'block', width: '100%', textAlign: 'left', padding: '8px 10px',
+        display: 'block', width: '100%', textAlign: 'left', padding: '5px 10px',
         border: 0, borderRadius: 7, marginBottom: 2,
         background: 'transparent', color: 'inherit', cursor: 'pointer', font: 'inherit',
       },
@@ -177,9 +181,21 @@ window.__ModuleLoader__.load({
         display: 'block', fontWeight: 600,
         overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
       },
+      rowNameFlex: {
+        display: 'flex', alignItems: 'center', gap: 6, minWidth: 0,
+      },
+      rowNameText: {
+        flex: '0 1 auto', minWidth: 0, fontWeight: 600,
+        overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+      },
       rowId: {
-        display: 'block', fontSize: 10.5, marginTop: 2,
+        display: 'block', fontSize: 10.5, marginTop: 1,
         color: 'var(--dsw-alias-label-secondary)',
+        overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+      },
+      rowIdInline: {
+        display: 'block', flex: '0 1 auto', minWidth: 0, maxWidth: '42%', marginTop: 0,
+        fontSize: 10, color: 'var(--dsw-alias-label-secondary)',
         overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
       },
       rowIdActive: { color: '#fff', opacity: .78 },
@@ -188,12 +204,15 @@ window.__ModuleLoader__.load({
         verticalAlign: 'middle', marginRight: 8, flex: '0 0 auto',
       },
       badge: {
-        display: 'inline-flex', alignItems: 'center', gap: 5, marginTop: 5,
-        fontSize: 10.5, fontWeight: 700, color: '#fff', letterSpacing: '.02em',
-        padding: '2px 7px', borderRadius: 999,
+        display: 'inline-flex', alignItems: 'center', flex: '0 0 auto',
+        fontSize: 9.5, fontWeight: 700, color: '#fff', letterSpacing: '.02em',
+        lineHeight: '13px', height: 13, padding: '0 5px', borderRadius: 999,
         background: 'var(--dsw-alias-brand-primary)', whiteSpace: 'nowrap',
+        maxWidth: 88, overflow: 'hidden', verticalAlign: 'middle',
       },
-      badgeDot: { width: 6, height: 6, borderRadius: '50%', display: 'inline-block' },
+      badgeText: {
+        minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+      },
       badgeTone: {
         info: 'var(--dsw-alias-brand-primary)',
         success: 'var(--dsw-alias-state-success-primary)',
@@ -296,9 +315,8 @@ window.__ModuleLoader__.load({
       const text = badgeText(m.badge.text);
       if (!text) return null;
       const bg = style.badgeTone[tone] || style.badgeTone.info;
-      return h('span', { key: 'badge-' + m.id, style: { ...style.badge, background: bg } },
-        h('span', { style: { ...style.badgeDot, background: bg } }),
-        h('span', null, text));
+      return h('span', { key: 'badge-' + m.id, title: text, style: { ...style.badge, background: bg } },
+        h('span', { style: style.badgeText }, text));
     }
 
     function loadPrefs() {
@@ -539,9 +557,10 @@ window.__ModuleLoader__.load({
           onClick: () => choose(m),
           title: m.id,
         },
-          h('span', { style: style.rowName }, m.name),
-          h('span', { style: { ...style.rowId, ...(isActive ? style.rowIdActive : {}) } }, m.id),
-          renderBadge(m),
+          h('span', { style: style.rowNameFlex },
+            h('span', { style: style.rowNameText }, m.name),
+            renderBadge(m),
+            h('span', { style: { ...style.rowIdInline, ...(isActive ? style.rowIdActive : {}) } }, m.id)),
         );
       });
 
