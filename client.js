@@ -112,7 +112,7 @@ window.__ModuleLoader__.load({
       trigger: {
         display: 'inline-flex', alignItems: 'center', alignSelf: 'center',
         flex: '0 0 auto', gap: 4, maxWidth: 260, minHeight: 22,
-        padding: '0 6px', border: '1px solid var(--dsw-alias-border-l1)', borderRadius: 7,
+        padding: '0 6px', border: '1px solid color-mix(in srgb, var(--dsw-alias-border-l1) 55%, transparent)', borderRadius: 7,
         background: 'var(--dsw-alias-bg-layer-2)', color: 'var(--dsw-alias-label-primary)',
         cursor: 'pointer', font: 'inherit', fontSize: 12.5, lineHeight: '20px',
       },
@@ -129,7 +129,7 @@ window.__ModuleLoader__.load({
         position: 'fixed', zIndex: 41, display: 'flex', flexDirection: 'column',
         width: 600, maxWidth: 'calc(100vw - 32px)', height: PANEL_H,
         maxHeight: 'calc(100vh - 32px)', overflow: 'hidden',
-        border: '1px solid var(--dsw-alias-border-l1)', borderRadius: 12,
+        border: '1px solid color-mix(in srgb, var(--dsw-alias-border-l1) 55%, transparent)', borderRadius: 12,
         background: 'var(--dsw-alias-bg-layer-1)', color: 'var(--dsw-alias-label-primary)',
         boxShadow: '0 8px 28px rgba(0, 0, 0, .14)',
         fontFamily: 'inherit', fontSize: 13, lineHeight: 1.5,
