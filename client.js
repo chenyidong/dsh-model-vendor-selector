@@ -111,17 +111,17 @@ window.__ModuleLoader__.load({
     const style = {
       trigger: {
         display: 'inline-flex', alignItems: 'center', alignSelf: 'center',
-        flex: '0 0 auto', gap: 5, maxWidth: 300, minHeight: 24,
-        padding: '0 8px', border: '1px solid var(--dsw-alias-border-l1)', borderRadius: 8,
+        flex: '0 0 auto', gap: 4, maxWidth: 260, minHeight: 22,
+        padding: '0 6px', border: '1px solid var(--dsw-alias-border-l1)', borderRadius: 7,
         background: 'var(--dsw-alias-bg-layer-2)', color: 'var(--dsw-alias-label-primary)',
-        cursor: 'pointer', font: 'inherit', fontSize: 13, lineHeight: '22px',
+        cursor: 'pointer', font: 'inherit', fontSize: 12.5, lineHeight: '20px',
       },
       triggerOpen: { borderColor: 'var(--dsw-alias-brand-primary)' },
       triggerLocked: { opacity: .5, cursor: 'not-allowed' },
       triggerName: { flex: '0 1 auto', minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 600 },
       triggerEffort: {
-        flex: '0 0 auto', fontSize: 11, color: 'var(--dsw-alias-label-secondary)',
-        whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 96,
+        flex: '0 0 auto', fontSize: 10.5, color: 'var(--dsw-alias-label-secondary)',
+        whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 72,
       },
       chevron: { flex: '0 0 auto', fontSize: 10, opacity: .6 },
       backdrop: { position: 'fixed', inset: 0, zIndex: 40 },
@@ -195,10 +195,9 @@ window.__ModuleLoader__.load({
         display: 'inline-block', width: 8, height: 8, borderRadius: '50%',
         verticalAlign: 'middle', marginRight: 8, flex: '0 0 auto',
       },
-      badgeSlot: {
-        display: 'flex', alignItems: 'center', height: 15, marginTop: 2,
-        overflow: 'visible',
-      },
+      rowLine: { display: 'flex', alignItems: 'flex-start', gap: 6 },
+      rowLineName: { flex: '1 1 auto', minWidth: 0 },
+      rowBadge: { marginTop: 3 },
       badge: {
         display: 'inline-flex', alignItems: 'center', flex: '0 0 auto',
         fontSize: 9.5, fontWeight: 700, color: '#fff', letterSpacing: '.02em',
@@ -208,6 +207,9 @@ window.__ModuleLoader__.load({
       },
       badgeText: {
         minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+      },
+      badgeCompact: {
+        fontSize: 9, lineHeight: '12px', height: 12, padding: '0 4px', maxWidth: 64,
       },
       badgeTone: {
         info: 'var(--dsw-alias-brand-primary)',
@@ -308,13 +310,14 @@ window.__ModuleLoader__.load({
       return null;
     }
 
-    function renderBadge(m) {
+    function renderBadge(m, compact) {
       if (!m || !m.badge) return null;
       const tone = String(m.badge.tone || m.badge.type || 'info').toLowerCase();
       const text = badgeText(m.badge.text);
       if (!text) return null;
       return h('span', { key: 'badge-' + m.id, title: text,
-        style: { ...style.badge, background: style.badgeTone[tone] || style.badgeTone.info } },
+        style: { ...style.badge, ...(compact ? style.badgeCompact : {}),
+          background: style.badgeTone[tone] || style.badgeTone.info } },
         h('span', { style: style.badgeText }, text));
     }
 
@@ -519,7 +522,7 @@ window.__ModuleLoader__.load({
       },
         h('span', { style: style.triggerName },
           currentModel ? currentModel.name : (catalog ? t('empty') : t('loading'))),
-        currentModel ? renderBadge(currentModel) : null,
+        currentModel ? renderBadge(currentModel, true) : null,
         currentEffort && h('span', { style: style.triggerEffort }, '· ' + currentEffort.name),
         h('span', { style: style.chevron, 'aria-hidden': true }, open ? '▾' : '▴'),
       );
@@ -554,8 +557,9 @@ window.__ModuleLoader__.load({
           onClick: () => choose(m),
           title: m.id,
         },
-          h('span', { style: style.rowName }, m.name),
-          h('span', { style: style.badgeSlot }, renderBadge(m)),
+          h('span', { style: style.rowLine },
+            h('span', { style: { ...style.rowName, ...style.rowLineName } }, m.name),
+            m.badge && h('span', { style: style.rowBadge }, renderBadge(m))),
         );
       });
 
