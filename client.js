@@ -48,6 +48,10 @@ window.__ModuleLoader__.load({
 .mvs-shimmer{background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);background-size:200% 100%;animation:mvs-drift 2.1s linear infinite}
 @keyframes mvs-drift{from{background-position:200% 0}to{background-position:-200% 0}}
 .mvs-row:hover{background:var(--dsw-alias-bg-layer-1)}
+.mvs-rowsep{position:relative}
+.mvs-rowsep::after{content:'';position:absolute;left:10px;right:10px;bottom:0;height:1px;background:var(--dsw-alias-border-l1);opacity:.5}
+.mvs-row[aria-selected="true"]::after{display:none}
+.mvs-rowsep:last-child::after{display:none}
 .mvs-root .mvs-row:focus-visible{outline:2px solid var(--dsw-alias-brand-primary);outline-offset:-2px}
 .mvs-check{accent-color:var(--dsw-alias-brand-primary);width:14px;height:14px;cursor:pointer;flex:0 0 auto}
 .mvs-range{position:absolute;left:0;top:50%;transform:translateY(-50%);width:100%;height:18px;margin:0;padding:0;-webkit-appearance:none;appearance:none;background:transparent;outline:none;cursor:pointer}
@@ -524,7 +528,7 @@ window.__ModuleLoader__.load({
         const isActive = active && active.id === g.id;
         const color = groupColor(g.id);
         return h('button', {
-          key: g.id, type: 'button', role: 'option', className: 'mvs-row',
+          key: g.id, type: 'button', role: 'option', className: 'mvs-row mvs-rowsep',
           'aria-selected': isActive,
           style: { ...style.row, ...(isActive ? style.rowActive : {}) },
           onClick: () => { setVendorId(g.id); setModelId(null); },
@@ -546,7 +550,7 @@ window.__ModuleLoader__.load({
       const modelRows = models.map(m => {
         const isActive = selected && selected.id === m.id;
         return h('button', {
-          key: m.id, type: 'button', role: 'option', className: 'mvs-row',
+          key: m.id, type: 'button', role: 'option', className: 'mvs-row mvs-rowsep',
           'aria-selected': isActive,
           style: { ...style.row, ...(isActive ? style.rowActive : {}) },
           onClick: () => choose(m),
