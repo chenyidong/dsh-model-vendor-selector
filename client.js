@@ -41,17 +41,20 @@ window.__ModuleLoader__.load({
       },
     };
 
+    // 弹层内部抬起面：以主题容器底色为基底，混入 6% 主文字色，浅色得极淡灰、深色得略亮灰，不透明且跟随主题
+    const RAISED_BG = 'color-mix(in srgb, var(--dsw-alias-label-primary) 6%, var(--dsw-alias-bg-layer-1))';
+
     const CSS = `
 .mvs-root{font-family:inherit;font-size:13px;line-height:1.5}
 .mvs-root button{font:inherit}
 .mvs-flow{background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--dsw-alias-brand-primary) 28%,transparent),transparent)}
-.mvs-row:hover{background:var(--dsw-alias-bg-layer-1)}
+.mvs-row:hover{background:${RAISED_BG}}
 .mvs-rowsep{position:relative}
 .mvs-rowsep::after{content:'';position:absolute;left:8px;right:8px;bottom:0;height:1px;background:linear-gradient(90deg,transparent 0,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 12%,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 88%,transparent 100%)}
 .mvs-row[aria-selected="true"]::after{display:none}
 .mvs-rowsep:last-child::after{display:none}
 .mvs-effort::before{content:'';position:absolute;left:8px;right:8px;top:0;height:1px;background:linear-gradient(90deg,transparent 0,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 12%,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 88%,transparent 100%)}
-.mvs-tick:hover{background:var(--dsw-alias-bg-layer-1);color:var(--dsw-alias-label-primary)}
+.mvs-tick:hover{background:${RAISED_BG};color:var(--dsw-alias-label-primary)}
 .mvs-root .mvs-row:focus-visible{outline:2px solid var(--dsw-alias-brand-primary);outline-offset:-2px}
 .mvs-check{accent-color:var(--dsw-alias-brand-primary);width:14px;height:14px;cursor:pointer;flex:0 0 auto}
 .mvs-range{position:absolute;left:0;top:50%;transform:translateY(-50%);width:100%;height:18px;margin:0;padding:0;-webkit-appearance:none;appearance:none;background:transparent;outline:none;cursor:pointer}
@@ -127,7 +130,7 @@ window.__ModuleLoader__.load({
         width: 600, maxWidth: 'calc(100vw - 32px)', height: PANEL_H,
         maxHeight: 'calc(100vh - 32px)', overflow: 'hidden',
         border: '1px solid var(--dsw-alias-border-l1)', borderRadius: 12,
-        background: 'var(--dsw-alias-bg-overlay)', color: 'var(--dsw-alias-label-primary)',
+        background: 'var(--dsw-alias-bg-layer-1)', color: 'var(--dsw-alias-label-primary)',
         boxShadow: '0 8px 28px rgba(0, 0, 0, .14)',
         fontFamily: 'inherit', fontSize: 13, lineHeight: 1.5,
       },
@@ -175,7 +178,7 @@ window.__ModuleLoader__.load({
         background: 'transparent', color: 'inherit', cursor: 'pointer', font: 'inherit',
       },
       rowActive: {
-        background: 'var(--dsw-alias-bg-layer-1)',
+        background: RAISED_BG,
         color: 'var(--dsw-alias-brand-primary)',
       },
       rowName: {
@@ -274,14 +277,14 @@ window.__ModuleLoader__.load({
       value: {
         fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
         padding: '2px 6px', borderRadius: 6,
-        background: 'var(--dsw-alias-bg-layer-1)',
+        background: RAISED_BG,
         wordBreak: 'break-all',
       },
       count: { fontSize: 11, color: 'var(--dsw-alias-label-secondary)' },
       button: {
         padding: '4px 10px', borderRadius: 7, cursor: 'pointer',
         border: '1px solid transparent',
-        background: 'var(--dsw-alias-bg-layer-1)',
+        background: RAISED_BG,
         color: 'var(--dsw-alias-label-primary)', font: 'inherit',
       },
     };
@@ -606,7 +609,7 @@ window.__ModuleLoader__.load({
           h('span', { style: { ...style.titleDot, background: accent } }),
           h('span', { style: style.effortLabel }, t('effort')),
           h('span', { style: { ...style.effortValue, ...(efforts.length > 1
-            ? { color: accent, background: 'var(--dsw-alias-bg-layer-1)' }
+            ? { color: accent, background: RAISED_BG }
             : { color: 'var(--dsw-alias-label-secondary)', background: 'transparent' }) } },
             effort ? effort.name : t('effortNone')),
           efforts.length > 1 && h('span', { style: style.effortHint }, t('effortHint'))),
@@ -631,7 +634,7 @@ window.__ModuleLoader__.load({
             key: e.id, className: 'mvs-tick',
             style: { ...style.tick, ...(i === effortIndex ? {
               ...style.tickActive, color: accent,
-              background: 'var(--dsw-alias-bg-layer-1)',
+              background: RAISED_BG,
             } : {}) },
             onClick: () => { setDraftEffort(i); saveEffort(i, sliderModel, sliderProvider); },
           }, e.name))),
