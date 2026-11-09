@@ -50,7 +50,7 @@ window.__ModuleLoader__.load({
 .mvs-flow{background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--dsw-alias-brand-primary) 28%,transparent),transparent)}
 .mvs-row:hover{background:${RAISED_BG}}
 .mvs-rowsep{position:relative}
-.mvs-rowsep::after{content:'';position:absolute;left:8px;right:8px;bottom:0;height:1px;background:linear-gradient(90deg,transparent 0,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 12%,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 88%,transparent 100%)}
+.mvs-rowsep::after{content:'';position:absolute;left:8px;right:8px;bottom:0;height:1px;opacity:.5;background:linear-gradient(90deg,transparent 0,color-mix(in srgb,var(--dsw-alias-border-l2) 80%,var(--dsw-alias-brand-primary)) 12%,color-mix(in srgb,var(--dsw-alias-border-l2) 80%,var(--dsw-alias-brand-primary)) 88%,transparent 100%)}
 .mvs-row[aria-selected="true"]::after{display:none}
 .mvs-rowsep:last-child::after{display:none}
 .mvs-effort::before{content:'';position:absolute;left:8px;right:8px;top:0;height:1px;background:linear-gradient(90deg,transparent 0,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 12%,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 88%,transparent 100%)}
