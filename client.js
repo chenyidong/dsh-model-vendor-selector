@@ -195,21 +195,21 @@ window.__ModuleLoader__.load({
         display: 'inline-block', width: 8, height: 8, borderRadius: '50%',
         verticalAlign: 'middle', marginRight: 8, flex: '0 0 auto',
       },
-      rowLine: { display: 'flex', alignItems: 'flex-start', gap: 6 },
-      rowLineName: { flex: '1 1 auto', minWidth: 0 },
-      rowBadge: { marginTop: 3 },
+      rowSecond: { display: 'flex', alignItems: 'center', gap: 6, marginTop: 1, overflow: 'visible' },
+      rowSecondId: { flex: '0 1 auto', minWidth: 0, marginTop: 0 },
       badge: {
         display: 'inline-flex', alignItems: 'center', flex: '0 0 auto',
         fontSize: 9.5, fontWeight: 700, color: '#fff', letterSpacing: '.02em',
-        lineHeight: '13px', height: 13, padding: '0 5px', borderRadius: 999,
+        lineHeight: 1.2, padding: '1px 5px', borderRadius: 999,
         background: 'var(--dsw-alias-brand-primary)', whiteSpace: 'nowrap',
         maxWidth: 88, overflow: 'hidden',
       },
       badgeText: {
-        minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+        display: 'block', lineHeight: 1.2, minWidth: 0,
+        overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
       },
       badgeCompact: {
-        fontSize: 9, lineHeight: '12px', height: 12, padding: '0 4px', maxWidth: 64,
+        fontSize: 9, lineHeight: 1.2, padding: '1px 4px', maxWidth: 64,
       },
       badgeTone: {
         info: 'var(--dsw-alias-brand-primary)',
@@ -552,9 +552,10 @@ window.__ModuleLoader__.load({
           onClick: () => choose(m),
           title: m.id,
         },
-          h('span', { style: style.rowLine },
-            h('span', { style: { ...style.rowName, ...style.rowLineName } }, m.name),
-            m.badge && h('span', { style: style.rowBadge }, renderBadge(m))),
+          h('span', { style: style.rowName }, m.name),
+          h('span', { style: style.rowSecond },
+            h('span', { style: { ...style.rowId, ...style.rowSecondId, ...(isActive ? style.rowIdActive : {}) } }, m.id),
+            renderBadge(m)),
         );
       });
 
