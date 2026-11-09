@@ -49,7 +49,7 @@ window.__ModuleLoader__.load({
 @keyframes mvs-drift{from{background-position:200% 0}to{background-position:-200% 0}}
 .mvs-row:hover{background:var(--dsw-alias-bg-layer-1)}
 .mvs-rowsep{position:relative}
-.mvs-rowsep::after{content:'';position:absolute;left:10px;right:10px;bottom:0;height:1px;background:var(--dsw-alias-border-l1);opacity:.5}
+.mvs-rowsep::after{content:'';position:absolute;left:8px;right:8px;bottom:0;height:1px;background:linear-gradient(90deg,transparent 0,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 12%,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 88%,transparent 100%)}
 .mvs-row[aria-selected="true"]::after{display:none}
 .mvs-rowsep:last-child::after{display:none}
 .mvs-root .mvs-row:focus-visible{outline:2px solid var(--dsw-alias-brand-primary);outline-offset:-2px}
