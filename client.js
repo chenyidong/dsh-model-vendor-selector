@@ -178,8 +178,8 @@ window.__ModuleLoader__.load({
         boxShadow: '0 2px 10px rgba(0, 0, 0, .14)',
       },
       rowName: {
-        display: 'block', fontWeight: 600,
-        overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+        display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical',
+        fontWeight: 600, overflow: 'hidden', overflowWrap: 'anywhere',
       },
       rowId: {
         display: 'block', fontSize: 10.5, marginTop: 1,
@@ -192,15 +192,15 @@ window.__ModuleLoader__.load({
         verticalAlign: 'middle', marginRight: 8, flex: '0 0 auto',
       },
       badgeSlot: {
-        display: 'block', height: 13, marginTop: 3, lineHeight: '13px',
-        overflow: 'hidden',
+        display: 'flex', alignItems: 'center', height: 15, marginTop: 2,
+        overflow: 'visible',
       },
       badge: {
         display: 'inline-flex', alignItems: 'center', flex: '0 0 auto',
         fontSize: 9.5, fontWeight: 700, color: '#fff', letterSpacing: '.02em',
         lineHeight: '13px', height: 13, padding: '0 5px', borderRadius: 999,
         background: 'var(--dsw-alias-brand-primary)', whiteSpace: 'nowrap',
-        maxWidth: 88, overflow: 'hidden', verticalAlign: 'middle',
+        maxWidth: 88, overflow: 'hidden',
       },
       badgeText: {
         minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
