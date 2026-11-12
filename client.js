@@ -365,11 +365,11 @@ window.__ModuleLoader__.load({
     function nameWithMultiplier(name) {
       const m = String(name).match(/[x×]\s?\d+(?:\.\d+)?/i);
       if (!m) return name;
-      return [
+      // 收进单个 inline span：rowName 是 -webkit-box vertical，多个直接子节点会各占一行
+      return h('span', { style: { display: 'inline' } },
         name.slice(0, m.index),
         h('span', { key: 'mult', style: { color: multiplierColor(m[0]), fontWeight: 700 } }, m[0]),
-        name.slice(m.index + m[0].length),
-      ];
+        name.slice(m.index + m[0].length));
     }
 
     function renderBadge(m, compact) {
