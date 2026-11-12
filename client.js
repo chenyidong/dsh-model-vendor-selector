@@ -379,7 +379,6 @@ window.__ModuleLoader__.load({
       if (!text) return null;
       return h('span', { key: 'badge-' + m.id, title: text,
         style: { ...style.badge, ...(compact ? style.badgeCompact : {}),
-          background: style.badgeTone[tone] || style.badgeTone.info } },
           background: multiplierColor(text) || style.badgeTone[tone] || style.badgeTone.info } },
         h('span', { style: style.badgeText }, text));
     }
