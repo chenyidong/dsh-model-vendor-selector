@@ -14,6 +14,7 @@ DeepSeek Harness Web GUI 的 UI 插件：点击输入框里的模型选择器，
 - **已选信息**：footer 原样显示选中模型的 `name` 与 `id`，一键复制模型名称。
 - **主题**：仅使用 `--dsw-alias-*` 主题令牌，跟随 Harness 明暗主题；多色强调（品牌色 / 成功 / 警告 / 错误 / 标签色）。
 
+- **触发器分组标识**：输入框触发器在模型名之前显示当前所属厂商（分组色点 + 厂商名，与左列 groupColor 同色）；未选中模型或目录未加载时不显示。
 ## 安装
 
 在 Harness 会话中用插件管理器安装本地目录（安装后对所有会话生效，重启后仍在）：
@@ -43,4 +44,4 @@ Client 侧 `dsh.client.inject`：`@deepseek-ai/dsh-api-session-controller`、`@d
 
 ## 版本
 
-1.2.0
+1.3.0

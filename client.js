@@ -45,6 +45,7 @@ window.__ModuleLoader__.load({
     const RAISED_BG = 'color-mix(in srgb, var(--dsw-alias-label-primary) 6%, var(--dsw-alias-bg-layer-1))';
 
     const CSS = `
+.mvs-root{font-family:inherit;font-size:13px;line-height:1.5}
 .mvs-root{
   --mvs-line:color-mix(in srgb,var(--dsw-alias-border-l2) 60%,transparent);
   --mvs-line-soft:linear-gradient(90deg,transparent 0,var(--mvs-line) 10%,var(--mvs-line) 90%,transparent 100%);
@@ -54,12 +55,15 @@ window.__ModuleLoader__.load({
 @keyframes mvs-in{from{opacity:0;transform:translateY(4px) scale(.99)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.mvs-root{animation:none}}
 .mvs-root button{font:inherit}
+.mvs-flow{background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--dsw-alias-brand-primary) 28%,transparent),transparent)}
 .mvs-flow{background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--dsw-alias-brand-primary) 14%,transparent),transparent)}
 .mvs-row:hover{background:${RAISED_BG}}
 .mvs-rowsep{position:relative}
+.mvs-rowsep::after{content:'';position:absolute;left:8px;right:8px;bottom:0;height:1px;opacity:.5;background:linear-gradient(90deg,transparent 0,color-mix(in srgb,var(--dsw-alias-border-l2) 80%,var(--dsw-alias-brand-primary)) 12%,color-mix(in srgb,var(--dsw-alias-border-l2) 80%,var(--dsw-alias-brand-primary)) 88%,transparent 100%)}
 .mvs-rowsep::after{content:'';position:absolute;left:10px;right:10px;bottom:0;height:1px;background:var(--mvs-line-soft)}
 .mvs-row[aria-selected="true"]::after{display:none}
 .mvs-rowsep:last-child::after{display:none}
+.mvs-effort::before{content:'';position:absolute;left:8px;right:8px;top:0;height:1px;background:linear-gradient(90deg,transparent 0,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 12%,color-mix(in srgb,var(--dsw-alias-border-l2) 55%,var(--dsw-alias-brand-primary)) 88%,transparent 100%)}
 .mvs-effort::before{content:'';position:absolute;left:14px;right:14px;top:0;height:1px;background:var(--mvs-line-soft)}
 .mvs-tick:hover{background:${RAISED_BG};color:var(--dsw-alias-label-primary)}
 .mvs-root .mvs-row:focus-visible{outline:2px solid var(--dsw-alias-brand-primary);outline-offset:-2px}
@@ -121,6 +125,9 @@ window.__ModuleLoader__.load({
     const style = {
       trigger: {
         display: 'inline-flex', alignItems: 'center', alignSelf: 'center',
+        flex: '0 0 auto', gap: 4, maxWidth: 260, minHeight: 22,
+        padding: '0 6px', border: '1px solid color-mix(in srgb, var(--dsw-alias-border-l1) 55%, transparent)', borderRadius: 7,
+        background: 'var(--dsw-alias-bg-layer-2)', color: 'var(--dsw-alias-label-primary)',
         flex: '0 0 auto', gap: 4, maxWidth: 260, minHeight: 26,
         padding: '3px 8px', borderRadius: 8, border: 0,
         background: 'color-mix(in srgb, var(--dsw-alias-label-primary) 5%, transparent)',
@@ -128,12 +135,17 @@ window.__ModuleLoader__.load({
         cursor: 'pointer', font: 'inherit', fontSize: 12.5, lineHeight: '20px',
         transition: 'background-color .15s, color .15s',
       },
+      triggerOpen: { borderColor: 'var(--dsw-alias-brand-primary)' },
       triggerOpen: {
         background: 'color-mix(in srgb, var(--dsw-alias-brand-primary) 11%, transparent)',
         color: 'var(--dsw-alias-brand-primary)',
       },
       triggerLocked: { opacity: .5, cursor: 'not-allowed' },
       triggerName: { flex: '0 1 auto', minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 600 },
+      triggerEffort: {
+        flex: '0 0 auto', fontSize: 10.5, color: 'var(--dsw-alias-label-secondary)',
+        whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 72,
+      },
       triggerEffort: { flex: '0 0 auto', fontSize: 10.5, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 72 },
       // 三段文字色区分（无背景）：模型名=深青 business，费用=琥珀 warn，思考强度=绿 success
       chipColor: { name: 'var(--dsw-alias-state-business-primary)', price: 'var(--dsw-alias-state-warn-primary)', effort: 'var(--dsw-alias-state-success-primary)' },
@@ -143,13 +155,16 @@ window.__ModuleLoader__.load({
         position: 'fixed', zIndex: 41, display: 'flex', flexDirection: 'column',
         width: 600, maxWidth: 'calc(100vw - 32px)', height: PANEL_H,
         maxHeight: 'calc(100vh - 32px)', overflow: 'hidden',
+        border: '1px solid color-mix(in srgb, var(--dsw-alias-border-l1) 55%, transparent)', borderRadius: 12,
         border: '1px solid var(--mvs-line)', borderRadius: 14,
         background: 'var(--dsw-alias-bg-layer-1)', color: 'var(--dsw-alias-label-primary)',
+        boxShadow: '0 8px 28px rgba(0, 0, 0, .14)',
         boxShadow: '0 0 0 1px color-mix(in srgb, var(--dsw-alias-label-primary) 3%, transparent), 0 2px 8px rgba(0, 0, 0, .05), 0 16px 40px rgba(0, 0, 0, .10)',
         fontFamily: 'inherit', fontSize: 13, lineHeight: 1.5,
       },
       header: {
         display: 'flex', alignItems: 'center', gap: 9, flex: '0 0 auto',
+        padding: '10px 14px 8px',
         padding: '12px 16px 10px',
       },
       headerMark: {
@@ -165,12 +180,15 @@ window.__ModuleLoader__.load({
         background: 'transparent',
         color: 'var(--dsw-alias-label-secondary)',
       },
+      gearActive: { color: 'var(--dsw-alias-brand-primary)' },
       gearActive: { color: 'var(--dsw-alias-brand-primary)', background: 'color-mix(in srgb, var(--dsw-alias-brand-primary) 8%, transparent)' },
       flowStrip: { height: 1, flex: '0 0 1px' },
+      body: { display: 'flex', flex: 1, minHeight: 0, padding: '10px 12px', gap: 12 },
       body: { display: 'flex', flex: 1, minHeight: 0, padding: '10px 14px', gap: 14 },
       col: { display: 'flex', flexDirection: 'column', minWidth: 0, minHeight: 0 },
       colVendor: { flex: '3 1 0' },
       colModel: { flex: '4 1 0' },
+      divider: { width: 1, alignSelf: 'stretch', background: 'var(--dsw-alias-border-l2)', opacity: .6 },
       divider: { width: 1, flex: '0 0 1px', alignSelf: 'stretch', background: 'linear-gradient(180deg, transparent, var(--mvs-line) 18%, var(--mvs-line) 82%, transparent)' },
       title: {
         display: 'flex', alignItems: 'center', gap: 6, flex: '0 0 auto',
@@ -235,6 +253,7 @@ window.__ModuleLoader__.load({
       },
       notice: { padding: '10px 6px', color: 'var(--dsw-alias-label-secondary)' },
       effort: {
+        position: 'relative', flex: '0 0 auto', padding: '9px 14px 10px',
         position: 'relative', flex: '0 0 auto', padding: '10px 16px 12px',
       },
       effortHead: { display: 'flex', alignItems: 'center', gap: 8, marginBottom: 9 },
@@ -272,6 +291,7 @@ window.__ModuleLoader__.load({
       sortLabel: { fontSize: 11, fontWeight: 700, letterSpacing: '.10em', textTransform: 'uppercase', color: 'var(--dsw-alias-label-secondary)' },
       select: {
         flex: 1, minWidth: 0, padding: '5px 8px', borderRadius: 7, cursor: 'pointer',
+        border: '1px solid var(--dsw-alias-border-l2)',
         border: '1px solid var(--mvs-line)',
         background: 'var(--dsw-alias-bg-layer-2)',
         color: 'var(--dsw-alias-label-primary)', font: 'inherit', fontSize: 12,
@@ -279,6 +299,7 @@ window.__ModuleLoader__.load({
       groupBar: { width: 3, height: 16, borderRadius: 2, flex: '0 0 auto' },
       groupRow: {
         display: 'flex', alignItems: 'center', gap: 9, padding: '9px 6px',
+        borderBottom: '1px solid var(--dsw-alias-border-l1)', fontWeight: 600,
         borderBottom: '1px solid var(--mvs-line)', fontWeight: 600,
       },
       modelRow: {
@@ -288,11 +309,13 @@ window.__ModuleLoader__.load({
       rowHidden: { opacity: .45, textDecoration: 'line-through' },
       footer: {
         flex: '0 0 auto', display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap',
+        padding: '9px 14px', borderTop: '1px solid var(--dsw-alias-border-l1)',
         padding: '10px 16px', borderTop: '1px solid var(--mvs-line)',
         fontSize: 12,
       },
       value: {
         fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace',
+        padding: '2px 6px', borderRadius: 6,
         padding: '2px 7px', borderRadius: 6,
         border: '1px solid color-mix(in srgb, var(--dsw-alias-border-l2) 40%, transparent)',
         background: RAISED_BG,
@@ -300,6 +323,8 @@ window.__ModuleLoader__.load({
       },
       count: { fontSize: 11, color: 'var(--dsw-alias-label-secondary)' },
       button: {
+        padding: '4px 10px', borderRadius: 7, cursor: 'pointer',
+        border: '1px solid transparent',
         padding: '4px 11px', borderRadius: 7, cursor: 'pointer',
         border: '1px solid var(--mvs-line)',
         background: RAISED_BG,
@@ -354,6 +379,7 @@ window.__ModuleLoader__.load({
       if (!text) return null;
       return h('span', { key: 'badge-' + m.id, title: text,
         style: { ...style.badge, ...(compact ? style.badgeCompact : {}),
+          background: style.badgeTone[tone] || style.badgeTone.info } },
           background: multiplierColor(text) || style.badgeTone[tone] || style.badgeTone.info } },
         h('span', { style: style.badgeText }, text));
     }
@@ -548,12 +574,23 @@ window.__ModuleLoader__.load({
       const chip = key => ({ color: style.chipColor[key] });
 
       const trigger = h('button', {
+        ref: triggerRef, type: 'button', disabled: locked,
         ref: triggerRef, type: 'button', disabled: locked, className: 'mvs-trigger',
         'aria-haspopup': 'dialog', 'aria-expanded': open,
         onClick: openPanel,
         title: currentModel ? currentModel.id : undefined,
         style: { ...style.trigger, ...(open ? style.triggerOpen : {}), ...(locked ? style.triggerLocked : {}) },
       },
+        h('span', { style: style.triggerName },
+          currentModel ? currentModel.name : (catalog ? t('empty') : t('loading'))),
+        currentModel ? renderBadge(currentModel, true) : null,
+        currentEffort && h('span', { style: style.triggerEffort }, '· ' + currentEffort.name),
+        currentGroup && h('span', {
+          style: { ...style.triggerEffort, maxWidth: 96, display: 'inline-flex', alignItems: 'center', gap: 4, color: groupColor(currentGroup.id), fontWeight: 600 },
+          title: t('vendor') + ': ' + currentGroup.name,
+        },
+          h('span', { style: { ...style.vendorDot, marginRight: 0, background: groupColor(currentGroup.id) } }),
+          h('span', { style: { overflow: 'hidden', textOverflow: 'ellipsis' } }, currentGroup.name)),
         h('span', { style: { ...style.triggerName, ...chip('name') } },
           currentModel ? nameWithMultiplier(currentModel.name) : (catalog ? t('empty') : t('loading'))),
         currentModel && badgeText(currentModel.badge) && (() => {
@@ -595,6 +632,7 @@ window.__ModuleLoader__.load({
           onClick: () => choose(m),
           title: m.id,
         },
+          h('span', { style: style.rowName }, m.name),
           h('span', { style: style.rowName }, nameWithMultiplier(m.name)),
           h('span', { style: style.rowSecond },
             h('span', { style: { ...style.rowId, ...style.rowSecondId, ...(isActive ? style.rowIdActive : {}) } }, m.id),
