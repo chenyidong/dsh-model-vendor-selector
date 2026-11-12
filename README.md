@@ -44,4 +44,4 @@ Client 侧 `dsh.client.inject`：`@deepseek-ai/dsh-api-session-controller`、`@d
 
 ## 版本
 
-1.3.0
+1.3.1
