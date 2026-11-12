@@ -573,17 +573,12 @@ window.__ModuleLoader__.load({
       const chip = key => ({ color: style.chipColor[key] });
 
       const trigger = h('button', {
-        ref: triggerRef, type: 'button', disabled: locked,
         ref: triggerRef, type: 'button', disabled: locked, className: 'mvs-trigger',
         'aria-haspopup': 'dialog', 'aria-expanded': open,
         onClick: openPanel,
         title: currentModel ? currentModel.id : undefined,
         style: { ...style.trigger, ...(open ? style.triggerOpen : {}), ...(locked ? style.triggerLocked : {}) },
       },
-        h('span', { style: style.triggerName },
-          currentModel ? currentModel.name : (catalog ? t('empty') : t('loading'))),
-        currentModel ? renderBadge(currentModel, true) : null,
-        currentEffort && h('span', { style: style.triggerEffort }, '· ' + currentEffort.name),
         currentGroup && h('span', {
           style: { ...style.triggerEffort, maxWidth: 96, display: 'inline-flex', alignItems: 'center', gap: 4, color: groupColor(currentGroup.id), fontWeight: 600 },
           title: t('vendor') + ': ' + currentGroup.name,
@@ -631,7 +626,6 @@ window.__ModuleLoader__.load({
           onClick: () => choose(m),
           title: m.id,
         },
-          h('span', { style: style.rowName }, m.name),
           h('span', { style: style.rowName }, nameWithMultiplier(m.name)),
           h('span', { style: style.rowSecond },
             h('span', { style: { ...style.rowId, ...style.rowSecondId, ...(isActive ? style.rowIdActive : {}) } }, m.id),
