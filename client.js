@@ -388,7 +388,7 @@ window.__ModuleLoader__.load({
 
     // 积分倍率三档色：<0.5 绿，0.5~1 琥珀，>1 红；解析不出数字则按原 tone
     function multiplierColor(text) {
-      const n = parseFloat(String(text).replace(/[,\\s]/g, '').replace(/x|×/i, ''));
+      const n = parseFloat(String(text).replace(/[,\s]/g, '').replace(/x|×/i, ''));
       if (!isFinite(n)) return null;
       if (n < 0.5) return 'var(--dsw-alias-state-success-primary)';
       if (n <= 1) return 'var(--dsw-alias-state-warn-primary)';
@@ -397,7 +397,7 @@ window.__ModuleLoader__.load({
 
     // 把名称里的倍率片段（x0.13 / ×2）拆出来按三档色着色
     function nameWithMultiplier(name) {
-      const m = String(name).match(/[x×]\\s?\\d+(?:\\.\\d+)?/i);
+      const m = String(name).match(/[x×]\s?\d+(?:\.\d+)?/i);
       if (!m) return name;
       // 收进单个 inline span：rowName 是 -webkit-box vertical，多个直接子节点会各占一行
       return h('span', { style: { display: 'inline' } },
